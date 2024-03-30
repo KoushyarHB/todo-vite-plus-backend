@@ -1,0 +1,23 @@
+{
+  "name": "vite-project",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "db": "npx json-server db.json"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.19",
+    "postcss": "^8.4.38",
+    "tailwindcss": "^3.4.2",
+    "vite": "^5.2.0"
+  },
+  "dependencies": {
+    "axios": "^1.6.8",
+    "json-server": "^1.0.0-alpha.23",
+    "vite-jsconfig-paths": "^2.0.1"
+  }
+}
