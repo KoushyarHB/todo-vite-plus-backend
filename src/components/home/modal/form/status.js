@@ -1,4 +1,4 @@
-import { El } from "../shared/El";
+import { El } from "../../shared/El";
 
 export const Status = () => {
   return El({

@@ -1,6 +1,6 @@
-import { El } from "../shared/El";
-import { CloseButton } from "./closeButton";
-import { ModalForm } from "./modalForm";
+import { El } from "../../../shared/El";
+import { CloseButton } from "./close-button";
+import { ModalForm } from "./form";
 
 export const Modal = () => {
   return El({

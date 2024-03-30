@@ -1,4 +1,4 @@
-import { El } from "../shared/El";
+import { El } from "../../components/shared/El";
 import { Functionalities } from "./functionalities";
 import { Title } from "./title";
 

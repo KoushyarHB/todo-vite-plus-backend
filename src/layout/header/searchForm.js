@@ -1,4 +1,4 @@
-import { El } from "../shared/El";
+import { El } from "../../components/shared/El";
 
 export const SearchForm = () => {
   return El({

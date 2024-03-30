@@ -1,4 +1,4 @@
-import { El } from "../shared/El";
+import { El } from "../../../../shared/El";
 import { Deadline } from "./deadline";
 import { ModalButton } from "./modalButton";
 import { Priority } from "./priority";

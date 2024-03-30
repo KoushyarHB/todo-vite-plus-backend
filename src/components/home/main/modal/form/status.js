@@ -1,32 +1,32 @@
-import { El } from "../shared/El";
+import { El } from "../../../../shared/El";
 
-export const Priority = () => {
+export const Status = () => {
   return El({
     element: "div",
     className: "flex justify-between py-2",
     children: [
       El({
         element: "label",
-        innerText: "Priority:",
+        innerText: "Status:",
       }),
       El({
         element: "select",
-        name: "priority",
+        name: "status",
         children: [
           El({
             element: "option",
-            value: "low",
-            innerText: "low",
+            value: "todo",
+            innerText: "Todo",
           }),
           El({
             element: "option",
-            value: "medium",
-            innerText: "medium",
+            value: "doing",
+            innerText: "Doing",
           }),
           El({
             element: "option",
-            value: "high",
-            innerText: "high",
+            value: "done",
+            innerText: "Done",
           }),
         ],
       }),

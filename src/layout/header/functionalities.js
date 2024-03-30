@@ -1,4 +1,4 @@
-import { El } from "../shared/El";
+import { El } from "../../components/shared/El";
 import { SearchForm } from "./searchForm";
 import { Filter } from "./filter";
 import { AddTask } from "./addTask";
