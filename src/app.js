@@ -1,9 +1,12 @@
 import { El } from "./components/shared/El";
+import { Header } from "./components/header/header";
 
 export const App = () => {
   return El({
     element: "div",
-    className: "bg-yellow-400",
-    children: "base div elem",
+    className: "min-h-screen",
+    children: [Header()],
   });
 };
+
+//, Main(), Footer()
