@@ -1,9 +1,9 @@
-import { postData } from "@/library/axios/axios";
+import { getData, postData } from "@/library/axios/axios";
 
 jalaliDatepicker.startWatch();
 jalaliDatepicker.updateOptions({ persianDigits: true, time: true });
 
-let tasksArr = JSON.parse(localStorage.getItem("key")) || [];
+let tasksArr = await getData();
 renderTasks(tasksArr);
 let editFlag = 0;
 let showFlag = 0;
@@ -35,9 +35,8 @@ function hideModal() {
 
 const modalForm = document.getElementById("modal-form");
 modalForm.addEventListener("submit", handleModalForm);
-// let counter = 0;
 
-function handleModalForm(e) {
+async function handleModalForm(e) {
   e.preventDefault();
   const { taskName, priority, status, date } = e.target;
   if (editFlag === 0 && showFlag === 0) {
@@ -48,9 +47,7 @@ function handleModalForm(e) {
       date: date.value,
       id: new Date().getTime() % 10000,
     };
-    // counter++;
-    // tasksArr.push(task);
-    postData(task);
+    await postData(task);
   } else if (showFlag === 0) {
     tasksArr.forEach((task) => {
       if (task.id === idOftaskBeingEdited) {
@@ -66,11 +63,12 @@ function handleModalForm(e) {
   }
   e.target.reset();
   hideModal();
+  tasksArr = await getData();
   renderTasks(tasksArr);
 }
 
 function renderTasks(arr) {
-  localStorage.setItem("key", JSON.stringify(arr));
+  // localStorage.setItem("key", JSON.stringify(arr));
   const tasksTable = document.getElementById("tasks-table");
   const tasksTableBody = tasksTable.querySelector("tbody");
   tasksTableBody.innerHTML = "";

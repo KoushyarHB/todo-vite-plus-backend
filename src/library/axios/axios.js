@@ -2,14 +2,6 @@ import axios from "axios";
 
 const baseURL = "http://localhost:3000/";
 
-// const data = {
-//   date: "1403/01/12 17:47:00",
-//   id: 8403,
-//   name: "sss",
-//   priority: "low",
-//   status: "todo",
-// };
-
 export const postData = async (data) => {
   try {
     const response = await axios.post(baseURL + "tasks", data);
@@ -21,8 +13,19 @@ export const postData = async (data) => {
   }
 };
 
-// postData(data);
+export const getData = async () => {
+  try {
+    const response = await axios.get(baseURL + "tasks");
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.error("Error posting data:", error);
+    throw error;
+  }
+};
 
+// postData(data);
+getData();
 // export const fetchData = async () => {
 //   const { data } = await axios.get("http://localhost:3000/posts");
 //   return data;
