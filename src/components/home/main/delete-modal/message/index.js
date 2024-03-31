@@ -1,4 +1,5 @@
 import { El } from "../../../../shared/El";
+import { localization } from "@/constant/localization";
 
 export const Message = () => {
   return El({
@@ -7,7 +8,7 @@ export const Message = () => {
     children: [
       El({
         element: "p",
-        innerText: "Are you sure you want to delete this task?",
+        innerText: localization.deleteModalMessage,
       }),
     ],
   });
