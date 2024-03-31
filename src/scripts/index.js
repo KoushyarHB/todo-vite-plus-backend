@@ -1,3 +1,5 @@
+import { postData } from "@/library/axios/axios";
+
 jalaliDatepicker.startWatch();
 jalaliDatepicker.updateOptions({ persianDigits: true, time: true });
 
@@ -47,7 +49,8 @@ function handleModalForm(e) {
       id: new Date().getTime() % 10000,
     };
     // counter++;
-    tasksArr.push(task);
+    // tasksArr.push(task);
+    postData(task);
   } else if (showFlag === 0) {
     tasksArr.forEach((task) => {
       if (task.id === idOftaskBeingEdited) {
