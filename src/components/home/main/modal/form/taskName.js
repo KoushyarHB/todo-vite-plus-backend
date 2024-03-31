@@ -14,6 +14,9 @@ export const TaskName = () => {
         type: "text",
         name: "taskName",
         placeholder: "Describe your task",
+        restAttrs: {
+          required: "",
+        },
       }),
     ],
   });
