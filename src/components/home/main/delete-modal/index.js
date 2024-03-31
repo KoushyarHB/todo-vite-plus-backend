@@ -7,7 +7,7 @@ import { Rejection } from "./rejection-button";
 export const DeleteModal = () => {
   return El({
     element: "div",
-    className: "delete-overlay",
+    className: "delete-overlay hidden",
     children: [
       El({
         element: "div",
