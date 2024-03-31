@@ -1,4 +1,4 @@
-import { getData, postData } from "@/library/axios/axios";
+import { getData, postData, deleteTask } from "@/library/axios/axios";
 
 jalaliDatepicker.startWatch();
 jalaliDatepicker.updateOptions({ persianDigits: true, time: true });
@@ -161,10 +161,9 @@ function handleDelete(e) {
   showDeleteModal();
 }
 
-function deleteConfirmed() {
-  tasksArr = tasksArr.filter((task) => {
-    return String(task.id) !== idOftaskBeingDeleted;
-  });
+async function deleteConfirmed() {
+  await deleteTask(idOftaskBeingDeleted);
+  tasksArr = await getData();
   renderTasks(tasksArr);
   hideDeleteModal();
 }
