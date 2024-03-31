@@ -7,12 +7,12 @@ export const CloseButton = () => {
     children: [
       El({
         element: "button",
-        id: "closeModal",
+        id: "closeDeleteModal",
         children: [
           El({
             element: "img",
             src: "./src/assets/icons/close.svg",
-            alt: "close",
+            alt: "close delete modal",
           }),
         ],
       }),
