@@ -31,3 +31,13 @@ export const deleteTask = async (id) => {
     throw error;
   }
 };
+
+export const editData = async (id, newData) => {
+  try {
+    const response = await axios.put(`${baseURL}/tasks/${id}`, newData);
+    return response.data;
+  } catch (error) {
+    console.error("Error updating data:", error);
+    throw error;
+  }
+};

@@ -1,4 +1,4 @@
-import { getData, postData, deleteTask } from "@/library/axios/axios";
+import { getData, postData, deleteTask, editData } from "@/library/axios/axios";
 
 jalaliDatepicker.startWatch();
 jalaliDatepicker.updateOptions({ persianDigits: true, time: true });
@@ -49,15 +49,23 @@ async function handleModalForm(e) {
     };
     await postData(task);
   } else if (showFlag === 0) {
-    tasksArr.forEach((task) => {
-      if (task.id === idOftaskBeingEdited) {
-        task.name = taskName.value;
-        task.priority = priority.value;
-        task.status = status.value;
-        task.date = date.value;
-      }
-      editFlag = 0;
-    });
+    // tasksArr.forEach((task) => {
+    //   if (task.id === idOftaskBeingEdited) {
+    //     task.name = taskName.value;
+    //     task.priority = priority.value;
+    //     task.status = status.value;
+    //     task.date = date.value;
+    //   }
+    //   editFlag = 0;
+    // });
+    const updatedTask = {
+      name: taskName.value,
+      priority: priority.value,
+      status: status.value,
+      date: date.value,
+    };
+    await editData(idOftaskBeingEdited, updatedTask);
+    editFlag = 0;
   } else {
     showFlag = 0;
   }
