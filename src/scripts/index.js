@@ -109,19 +109,19 @@ function renderTasks(arr) {
 
     const deleteBtn = document.createElement("img");
     deleteBtn.classList.add("delete-btn");
-    deleteBtn.src = "../assets/icons/delete.svg";
+    deleteBtn.src = "./src/assets/icons/delete.svg";
     deleteBtn.alt = "delete";
     deleteBtn.addEventListener("click", handleDelete);
 
     const editBtn = document.createElement("img");
     editBtn.classList.add("edit-btn");
-    editBtn.src = "../assets/icons/edit.svg";
+    editBtn.src = "./src/assets/icons/edit.svg";
     editBtn.alt = "edit";
     editBtn.addEventListener("click", handleEdit);
 
     const showBtn = document.createElement("img");
     showBtn.classList.add("show-btn");
-    showBtn.src = "../assets/icons/show.svg";
+    showBtn.src = "./src/assets/icons/show.svg";
     showBtn.alt = "show";
     showBtn.addEventListener("click", handleShow);
 
