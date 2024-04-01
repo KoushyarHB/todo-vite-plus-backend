@@ -62,3 +62,7 @@
 .delete-modal {
   @apply bg-gray-900 bg-opacity-20 fixed inset-0 flex items-center justify-center;
 }
+
+.selected {
+  @apply bg-blue-500 text-white;
+}

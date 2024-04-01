@@ -3,7 +3,7 @@ import { El } from "../../../../shared/El";
 export const ModalButton = () => {
   return El({
     element: "div",
-    className: "modal-btn text-center mt-4",
+    className: "filter-modal-btn text-center mt-4",
     children: [
       El({
         element: "button",

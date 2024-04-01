@@ -13,7 +13,6 @@ export const Deadline = () => {
         element: "input",
         className: "border shadow-sm rounded-md p-2",
         restAttrs: {
-          required: "",
           name: "date",
           placeholder: "Due time",
         },

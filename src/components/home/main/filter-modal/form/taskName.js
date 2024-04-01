@@ -5,11 +5,6 @@ export const TaskName = () => {
     element: "div",
     children: [
       El({
-        element: "p",
-        className: "mb-3",
-        innerText: "Filter Your Tasks Base on:",
-      }),
-      El({
         element: "div",
         className: "flex justify-between items-center",
         children: [
@@ -23,9 +18,6 @@ export const TaskName = () => {
             type: "text",
             name: "taskName",
             placeholder: "Describe your task",
-            restAttrs: {
-              required: "",
-            },
           }),
         ],
       }),

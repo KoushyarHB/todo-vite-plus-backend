@@ -1,3 +1,5 @@
+import _ from "lodash";
+
 import {
   getData,
   postData,
@@ -235,6 +237,16 @@ async function handleSearch(e) {
   renderTasks(searchResult);
 }
 
+// searchForm.addEventListener("submit", debouncedHandleSearch);
+
+// const debouncedHandleSearch = _.debounce(async function (e) {
+//   e.preventDefault();
+//   const { searchQuery } = e.target;
+//   const searchResult = await getDataWithSearch(searchQuery.value);
+//   console.log(searchResult);
+//   renderTasks(searchResult);
+// }, 500);
+
 //////////////////////////////////////
 
 const paginationTotal = document.getElementById("pagination-total");
@@ -282,4 +294,37 @@ async function pagination() {
   const numberOfTasks = tasks.length;
   localStorage.setItem("numberOfTasks", numberOfTasks);
   paginationTotal.textContent = numberOfTasks;
+}
+
+//////////////////////////////////////
+
+document.querySelectorAll(".filter-priority label").forEach((label) => {
+  label.addEventListener("click", function () {
+    const input = document.querySelector(`#${this.getAttribute("for")}`);
+    input.checked = true;
+    document.querySelectorAll(".filter-priority label").forEach((lbl) => {
+      lbl.classList.remove("selected");
+    });
+    this.classList.add("selected");
+  });
+});
+
+document.querySelectorAll(".filter-status label").forEach((label) => {
+  label.addEventListener("click", function () {
+    const input = document.querySelector(`#${this.getAttribute("for")}`);
+    input.checked = true;
+    document.querySelectorAll(".filter-status label").forEach((lbl) => {
+      lbl.classList.remove("selected");
+    });
+    this.classList.add("selected");
+  });
+});
+
+const filterOverlay = document.querySelector(".filter-overlay");
+const closeFilterModal = document.getElementById("closeFilterModal");
+
+closeFilterModal.addEventListener("click", hideFilterModal);
+
+function hideFilterModal() {
+  filterOverlay.classList.add("hidden");
 }
