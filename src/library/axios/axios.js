@@ -54,7 +54,14 @@ export const getDataWithSearch = async (searchQuery) => {
 
 export const getDataWithFilter = async (filterQuery) => {
   try {
-    const response = await axios.get(`${baseURL}/tasks?q=${filterQuery}`);
+    const queryString = Object.keys(filterQuery)
+      .map(
+        (key) =>
+          `${encodeURIComponent(key)}=${encodeURIComponent(filterQuery[key])}`
+      )
+      .join("&");
+    const response = await axios.get(`${baseURL}/tasks?${queryString}`);
+
     return response.data;
   } catch (error) {
     console.error("Error filtering tasks:", error);

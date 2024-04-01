@@ -353,24 +353,12 @@ async function handleFilter(e) {
   const priority = formData.get("priority");
   const status = formData.get("status");
   const deadline = formData.get("deadline");
-  console.log(
-    `Task Name: ${taskName}, Priority: ${priority}, Status: ${status}, Deadline: ${deadline}`
-  );
-
   let query = {};
-  if (taskName) query.taskName = taskName;
+  if (taskName) query.name = taskName;
   if (priority) query.priority = priority;
   if (status) query.status = status;
-  if (deadline) query.deadline = deadline;
-
-  console.log(query);
-
-  let filterResult = [];
-  for (let key in query) {
-    const res = await getDataWithFilter(query[key]);
-    console.log(res);
-    filterResult = [...filterResult, ...res];
-  }
+  if (deadline) query.date = deadline;
+  const filterResult = await getDataWithFilter(query);
   renderTasks(filterResult);
   hideFilterModal();
 }
