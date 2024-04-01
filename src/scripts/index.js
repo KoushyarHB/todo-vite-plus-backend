@@ -74,10 +74,17 @@ async function handleModalForm(e) {
 }
 
 function renderTasks(arr) {
+  const numberOfTasks = Number(localStorage.getItem("numberOfTasks"));
+  const rowsPerPage = Number(localStorage.getItem("rowsPerPage"));
+  const pageNumber = Number(localStorage.getItem("pageNumber"));
+  const startIndex = (pageNumber - 1) * rowsPerPage;
+  const endIndex = startIndex + rowsPerPage;
+  const slicedArr = arr.slice(startIndex, endIndex);
+  console.log(numberOfTasks, rowsPerPage, pageNumber);
   const tasksTable = document.getElementById("tasks-table");
   const tasksTableBody = tasksTable.querySelector("tbody");
   tasksTableBody.innerHTML = "";
-  arr.forEach((task) => {
+  slicedArr.forEach((task) => {
     const taskRow = document.createElement("tr");
     taskRow.id = task.id;
     const taskNameCell = document.createElement("td");
@@ -143,6 +150,7 @@ function renderTasks(arr) {
     );
     tasksTableBody.append(taskRow);
   });
+  pagination();
 }
 
 const deleteOverlay = document.querySelector(".delete-overlay");
@@ -218,4 +226,64 @@ async function handleSearch(e) {
   const { searchQuery } = e.target;
   const searchResult = await getDataWithSearch(searchQuery.value);
   renderTasks(searchResult);
+}
+
+//////////////////////////////////////
+localStorage.setItem("pageNumber", "1");
+localStorage.setItem("rowsPerPage", "100");
+const paginationTotal = document.getElementById("pagination-total");
+const paginationSelect = document.getElementById("pagination-select");
+const paginationEnd = document.getElementById("pagination-end");
+const paginationNext = document.getElementById("pagination-next");
+const paginationPrevious = document.getElementById("pagination-previous");
+
+paginationSelect.addEventListener("change", handlePaginationSelect);
+
+function handlePaginationSelect() {
+  localStorage.setItem("rowsPerPage", paginationSelect.value);
+  renderTasks(tasksArr);
+}
+
+paginationNext.addEventListener("click", handleNextPage);
+
+function handleNextPage() {
+  const rrp = Number(localStorage.getItem("rowsPerPage"));
+  const numOfTasks = Number(localStorage.getItem("numberOfTasks"));
+  const maxNumOfpages =
+    Math.floor(numOfTasks / rrp) !== numOfTasks / rrp
+      ? Math.floor(numOfTasks / rrp) + 1
+      : numOfTasks / rrp;
+  let num = Number(localStorage.getItem("pageNumber"));
+  if (num < maxNumOfpages) num++;
+  localStorage.setItem("pageNumber", num);
+
+  renderTasks(tasksArr);
+}
+
+paginationPrevious.addEventListener("click", handlePreviousPage);
+
+function handlePreviousPage() {
+  let num = Number(localStorage.getItem("pageNumber"));
+  if (num > 1) num--;
+  localStorage.setItem("pageNumber", num);
+
+  renderTasks(tasksArr);
+}
+
+async function pagination() {
+  // Pagination Text - Total
+  const tasks = await getData();
+  const numberOfTasks = tasks.length;
+  localStorage.setItem("numberOfTasks", numberOfTasks);
+  paginationTotal.textContent = numberOfTasks;
+
+  // Pagination Select
+  let rowsPerPage;
+  rowsPerPage = paginationSelect.value;
+
+  // Pagination Text - End
+  paginationEnd.textContent =
+    Number(rowsPerPage) !== 100 && Number(rowsPerPage) <= numberOfTasks
+      ? rowsPerPage
+      : numberOfTasks;
 }

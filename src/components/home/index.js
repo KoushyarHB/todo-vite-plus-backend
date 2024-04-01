@@ -5,7 +5,7 @@ import { Main } from "../home/main";
 export function Home() {
   return El({
     element: "div",
-    className: "w-full",
+    className: "w-full min-h-screen",
     children: [PageLayout(Main)],
   });
 }
