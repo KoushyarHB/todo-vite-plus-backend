@@ -10,6 +10,8 @@ jalaliDatepicker.startWatch();
 jalaliDatepicker.updateOptions({ persianDigits: true, time: true });
 
 let tasksArr = await getData();
+localStorage.setItem("pageNumber", "1");
+localStorage.setItem("rowsPerPage", "100");
 renderTasks(tasksArr);
 let editFlag = 0;
 let showFlag = 0;
@@ -73,14 +75,20 @@ async function handleModalForm(e) {
   renderTasks(tasksArr);
 }
 
-function renderTasks(arr) {
-  const numberOfTasks = Number(localStorage.getItem("numberOfTasks"));
+async function renderTasks(arr) {
+  await pagination();
   const rowsPerPage = Number(localStorage.getItem("rowsPerPage"));
   const pageNumber = Number(localStorage.getItem("pageNumber"));
+  const numberOfTasks = Number(localStorage.getItem("numberOfTasks"));
+  console.log(numberOfTasks);
   const startIndex = (pageNumber - 1) * rowsPerPage;
   const endIndex = startIndex + rowsPerPage;
+  const paginationStart = document.getElementById("pagination-start");
+  paginationStart.textContent = startIndex + 1;
+  const paginationEnd = document.getElementById("pagination-end");
+  paginationEnd.textContent =
+    endIndex > numberOfTasks ? numberOfTasks : endIndex;
   const slicedArr = arr.slice(startIndex, endIndex);
-  console.log(numberOfTasks, rowsPerPage, pageNumber);
   const tasksTable = document.getElementById("tasks-table");
   const tasksTableBody = tasksTable.querySelector("tbody");
   tasksTableBody.innerHTML = "";
@@ -150,7 +158,6 @@ function renderTasks(arr) {
     );
     tasksTableBody.append(taskRow);
   });
-  pagination();
 }
 
 const deleteOverlay = document.querySelector(".delete-overlay");
@@ -229,11 +236,9 @@ async function handleSearch(e) {
 }
 
 //////////////////////////////////////
-localStorage.setItem("pageNumber", "1");
-localStorage.setItem("rowsPerPage", "100");
+
 const paginationTotal = document.getElementById("pagination-total");
 const paginationSelect = document.getElementById("pagination-select");
-const paginationEnd = document.getElementById("pagination-end");
 const paginationNext = document.getElementById("pagination-next");
 const paginationPrevious = document.getElementById("pagination-previous");
 
@@ -254,36 +259,29 @@ function handleNextPage() {
       ? Math.floor(numOfTasks / rrp) + 1
       : numOfTasks / rrp;
   let num = Number(localStorage.getItem("pageNumber"));
-  if (num < maxNumOfpages) num++;
-  localStorage.setItem("pageNumber", num);
-
-  renderTasks(tasksArr);
+  if (num < maxNumOfpages) {
+    num++;
+    localStorage.setItem("pageNumber", num);
+    renderTasks(tasksArr);
+  }
 }
 
 paginationPrevious.addEventListener("click", handlePreviousPage);
 
 function handlePreviousPage() {
   let num = Number(localStorage.getItem("pageNumber"));
-  if (num > 1) num--;
-  localStorage.setItem("pageNumber", num);
-
-  renderTasks(tasksArr);
+  if (num > 1) {
+    num--;
+    localStorage.setItem("pageNumber", num);
+    renderTasks(tasksArr);
+  }
 }
 
 async function pagination() {
   // Pagination Text - Total
   const tasks = await getData();
   const numberOfTasks = tasks.length;
+  console.log("pagnum " + numberOfTasks);
   localStorage.setItem("numberOfTasks", numberOfTasks);
   paginationTotal.textContent = numberOfTasks;
-
-  // Pagination Select
-  let rowsPerPage;
-  rowsPerPage = paginationSelect.value;
-
-  // Pagination Text - End
-  paginationEnd.textContent =
-    Number(rowsPerPage) !== 100 && Number(rowsPerPage) <= numberOfTasks
-      ? rowsPerPage
-      : numberOfTasks;
 }
