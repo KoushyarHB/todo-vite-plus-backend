@@ -1,4 +1,10 @@
-import { getData, postData, deleteTask, editData } from "@/library/axios/axios";
+import {
+  getData,
+  postData,
+  deleteTask,
+  editData,
+  getDataWithSearch,
+} from "@/library/axios/axios";
 
 jalaliDatepicker.startWatch();
 jalaliDatepicker.updateOptions({ persianDigits: true, time: true });
@@ -202,3 +208,14 @@ function auxiliaty(e) {
 }
 
 //////////////////////////////////////
+
+const searchForm = document.getElementById("search");
+
+searchForm.addEventListener("submit", handleSearch);
+
+async function handleSearch(e) {
+  e.preventDefault();
+  const { searchQuery } = e.target;
+  const searchResult = await getDataWithSearch(searchQuery.value);
+  renderTasks(searchResult);
+}

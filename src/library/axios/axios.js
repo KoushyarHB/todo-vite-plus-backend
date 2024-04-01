@@ -41,3 +41,13 @@ export const editData = async (id, newData) => {
     throw error;
   }
 };
+
+export const getDataWithSearch = async (searchQuery) => {
+  try {
+    const response = await axios.get(`${baseURL}/tasks?q=${searchQuery}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    throw error;
+  }
+};

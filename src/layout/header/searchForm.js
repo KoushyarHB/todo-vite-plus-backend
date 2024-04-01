@@ -3,6 +3,7 @@ import { El } from "../../components/shared/El";
 export const SearchForm = () => {
   return El({
     element: "form",
+    id: "search",
     children: [
       El({
         element: "div",
@@ -24,6 +25,7 @@ export const SearchForm = () => {
             element: "input",
             className: "block w-full p-1 ps-10 text-sm rounded-sm bg-secondary",
             type: "search",
+            name: "searchQuery",
             placeholder: "Search",
           }),
         ],
