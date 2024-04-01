@@ -47,7 +47,16 @@ export const getDataWithSearch = async (searchQuery) => {
     const response = await axios.get(`${baseURL}/tasks?q=${searchQuery}`);
     return response.data;
   } catch (error) {
-    console.error("Error fetching data:", error);
+    console.error("Error searching tasks:", error);
     throw error;
+  }
+};
+
+export const getDataWithFilter = async (filterQuery) => {
+  try {
+    const response = await axios.get(`${baseURL}/tasks?q=${filterQuery}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error filtering tasks:", error);
   }
 };

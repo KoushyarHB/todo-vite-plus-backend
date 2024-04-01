@@ -13,7 +13,7 @@ export const Deadline = () => {
         element: "input",
         className: "border shadow-sm rounded-md p-2",
         restAttrs: {
-          name: "date",
+          name: "deadline",
           placeholder: "Due time",
         },
         dataset: {

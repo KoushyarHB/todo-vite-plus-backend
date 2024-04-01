@@ -6,6 +6,7 @@ import {
   deleteTask,
   editData,
   getDataWithSearch,
+  getDataWithFilter,
 } from "@/library/axios/axios";
 
 jalaliDatepicker.startWatch();
@@ -322,9 +323,17 @@ document.querySelectorAll(".filter-status label").forEach((label) => {
 
 const filterBtn = document.getElementById("filter");
 const filterOverlay = document.querySelector(".filter-overlay");
+const filterModalForm = document.getElementById("filter-modal-form");
+
 filterBtn.addEventListener("click", filter);
 
 function filter() {
+  filterModalForm.reset();
+  document
+    .querySelectorAll(".filter-priority label, .filter-status label")
+    .forEach((label) => {
+      label.classList.remove("selected");
+    });
   filterOverlay.classList.remove("hidden");
 }
 
@@ -335,17 +344,33 @@ function hideFilterModal() {
   filterOverlay.classList.add("hidden");
 }
 
-const filterModalForm = document.getElementById("filter-modal-form");
 filterModalForm.addEventListener("submit", handleFilter);
 
-function handleFilter(e) {
+async function handleFilter(e) {
   e.preventDefault();
-
   const formData = new FormData(e.target);
   const taskName = formData.get("taskName");
   const priority = formData.get("priority");
   const status = formData.get("status");
+  const deadline = formData.get("deadline");
   console.log(
-    `Task Name: ${taskName}, Priority: ${priority}, Status: ${status}`
+    `Task Name: ${taskName}, Priority: ${priority}, Status: ${status}, Deadline: ${deadline}`
   );
+
+  let query = {};
+  if (taskName) query.taskName = taskName;
+  if (priority) query.priority = priority;
+  if (status) query.status = status;
+  if (deadline) query.deadline = deadline;
+
+  console.log(query);
+
+  let filterResult = [];
+  for (let key in query) {
+    const res = await getDataWithFilter(query[key]);
+    console.log(res);
+    filterResult = [...filterResult, ...res];
+  }
+  renderTasks(filterResult);
+  hideFilterModal();
 }
