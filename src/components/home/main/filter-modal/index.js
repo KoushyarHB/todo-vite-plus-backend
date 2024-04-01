@@ -5,7 +5,7 @@ import { ModalForm } from "./form";
 export const FilterModal = () => {
   return El({
     element: "div",
-    className: "filter-overlay",
+    className: "filter-overlay hidden",
     children: [
       El({
         element: "div",

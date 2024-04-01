@@ -320,11 +320,32 @@ document.querySelectorAll(".filter-status label").forEach((label) => {
   });
 });
 
+const filterBtn = document.getElementById("filter");
 const filterOverlay = document.querySelector(".filter-overlay");
-const closeFilterModal = document.getElementById("closeFilterModal");
+filterBtn.addEventListener("click", filter);
 
+function filter() {
+  filterOverlay.classList.remove("hidden");
+}
+
+const closeFilterModal = document.getElementById("closeFilterModal");
 closeFilterModal.addEventListener("click", hideFilterModal);
 
 function hideFilterModal() {
   filterOverlay.classList.add("hidden");
+}
+
+const filterModalForm = document.getElementById("filter-modal-form");
+filterModalForm.addEventListener("submit", handleFilter);
+
+function handleFilter(e) {
+  e.preventDefault();
+
+  const formData = new FormData(e.target);
+  const taskName = formData.get("taskName");
+  const priority = formData.get("priority");
+  const status = formData.get("status");
+  console.log(
+    `Task Name: ${taskName}, Priority: ${priority}, Status: ${status}`
+  );
 }

@@ -24,7 +24,7 @@ export const Status = () => {
           El({
             element: "input",
             type: "radio",
-            name: "priority",
+            name: "status",
             value: "todo",
             id: "todo",
             className: "hidden",
@@ -40,7 +40,7 @@ export const Status = () => {
           El({
             element: "input",
             type: "radio",
-            name: "priority",
+            name: "status",
             value: "doing",
             id: "doing",
             className: "hidden",
@@ -51,43 +51,18 @@ export const Status = () => {
               for: "done",
             },
             className: "p-2 border rounded-lg",
-            innerText: "high",
+            innerText: "done",
           }),
           El({
             element: "input",
             type: "radio",
-            name: "priority",
+            name: "status",
             value: "done",
             id: "done",
             className: "hidden",
           }),
         ],
       }),
-      // El({
-      //   element: "label",
-      //   innerText: "Status:",
-      // }),
-      // El({
-      //   element: "select",
-      //   name: "status",
-      //   children: [
-      //     El({
-      //       element: "option",
-      //       value: "todo",
-      //       innerText: "Todo",
-      //     }),
-      //     El({
-      //       element: "option",
-      //       value: "doing",
-      //       innerText: "Doing",
-      //     }),
-      //     El({
-      //       element: "option",
-      //       value: "done",
-      //       innerText: "Done",
-      //     }),
-      //   ],
-      // }),
     ],
   });
 };
