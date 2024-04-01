@@ -29,6 +29,7 @@ function showModal() {
 
 const closeModalBtn = document.getElementById("closeModal");
 closeModalBtn.addEventListener("click", hideModal);
+
 function hideModal() {
   overLay.classList.add("hidden");
 }
@@ -49,15 +50,6 @@ async function handleModalForm(e) {
     };
     await postData(task);
   } else if (showFlag === 0) {
-    // tasksArr.forEach((task) => {
-    //   if (task.id === idOftaskBeingEdited) {
-    //     task.name = taskName.value;
-    //     task.priority = priority.value;
-    //     task.status = status.value;
-    //     task.date = date.value;
-    //   }
-    //   editFlag = 0;
-    // });
     const updatedTask = {
       name: taskName.value,
       priority: priority.value,
@@ -208,3 +200,5 @@ function auxiliaty(e) {
 
   return Number(taskId);
 }
+
+//////////////////////////////////////
