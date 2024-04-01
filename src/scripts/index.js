@@ -13,8 +13,8 @@ let tasksArr = await getData();
 localStorage.setItem("pageNumber", "1");
 localStorage.setItem("rowsPerPage", "100");
 renderTasks(tasksArr);
-let editFlag = 0;
-let showFlag = 0;
+let editFlag = false;
+let showFlag = false;
 let idOftaskBeingEdited;
 let idOftaskBeingDeleted;
 const addTaskBtn = document.getElementById("add-task");
@@ -48,7 +48,7 @@ modalForm.addEventListener("submit", handleModalForm);
 async function handleModalForm(e) {
   e.preventDefault();
   const { taskName, priority, status, date } = e.target;
-  if (editFlag === 0 && showFlag === 0) {
+  if (editFlag === false && showFlag === false) {
     let task = {
       name: taskName.value,
       priority: priority.value,
@@ -57,7 +57,7 @@ async function handleModalForm(e) {
       id: new Date().getTime() % 10000,
     };
     await postData(task);
-  } else if (showFlag === 0) {
+  } else if (showFlag === false) {
     const updatedTask = {
       name: taskName.value,
       priority: priority.value,
@@ -65,9 +65,9 @@ async function handleModalForm(e) {
       date: date.value,
     };
     await editData(idOftaskBeingEdited, updatedTask);
-    editFlag = 0;
+    editFlag = false;
   } else {
-    showFlag = 0;
+    showFlag = false;
   }
   e.target.reset();
   hideModal();
@@ -190,7 +190,7 @@ async function deleteConfirmed() {
 }
 
 function handleShow(e) {
-  showFlag = 1;
+  showFlag = true;
   auxiliaty(e);
   const modalBtnDiv = overLay.querySelector(".modal-btn");
   modalBtnDiv.classList.add("hidden");
@@ -204,7 +204,7 @@ function handleEdit(e) {
   modalBtn.textContent = "Edit Task";
   idOftaskBeingEdited = auxiliaty(e);
   showModal();
-  editFlag = 1;
+  editFlag = true;
 }
 
 function auxiliaty(e) {
@@ -278,10 +278,8 @@ function handlePreviousPage() {
 }
 
 async function pagination() {
-  // Pagination Text - Total
   const tasks = await getData();
   const numberOfTasks = tasks.length;
-  console.log("pagnum " + numberOfTasks);
   localStorage.setItem("numberOfTasks", numberOfTasks);
   paginationTotal.textContent = numberOfTasks;
 }
